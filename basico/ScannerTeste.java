@@ -1,7 +1,5 @@
 package com.loiane.basicoJava;
 
-import sun.security.krb5.internal.crypto.EType;
-
 import java.util.Scanner;
 
 public class ScannerTeste {
