@@ -7,19 +7,22 @@ public class Main {
         Ex08Class P1 = new Ex08Class("Lucas","M",18,80,1.66);
         Ex08Class P2 = new Ex08Class("Maria","F",18,55.30,1.60);
         Ex08Class P3 = new Ex08Class("Jose","M",50,94.96,1.65);
+        String[] nomePacientes = {P1.getNome(),P2.getNome(),P3.getNome()};
+        String[] sexoPacientes = {P1.getSexo(),P2.getSexo(),P3.getSexo()};
+        int[] idadePacientes = {P1.getIdade(), P2.getIdade(), P3.getIdade()};
+        double[] pesoPacientes = {P1.getPeso(), P2.getPeso(),P3.getPeso()};
+        double[] alturaPacientes = {P1.getAltura(), P2.getAltura(),P3.getAltura()};
+        
 
         //M = MASCULINO
         //F = FEMININO
 
+        System.out.println("Existem "+ nomePacientes.length + " pacientes na clinica");
 
-        String[] nome = {P1.getNome(),P2.getNome(),P3.getNome()};
-        System.out.println("Existem "+ nome.length + " pacientes na clinica");
-
-        String[] sexo = {P1.getSexo(),P2.getSexo(),P3.getSexo()};
-        int[] idadeM = {P1.getIdade(), P2.getIdade(), P3.getIdade()};
+//MEDIA IDADE HOMENS NA SALA
         int somaIdade = 0;
         int qtdHomens= 0;
-        for(int i = 0; i < nome.length; i++){
+        for(int i = 0; i < nomePacientes.length; i++){
             if (sexo[i] == "M") {
                 somaIdade += idadeM[i];
                 qtdHomens +=1;
@@ -30,17 +33,16 @@ public class Main {
         } else {
             System.out.println("Não existem homens na sala");
         }
+//FIM
 
-
-
-
-        double[] qtdMulherAltura = {P1.getAltura(), P2.getAltura(),P3.getAltura()};
-        double[] qtdMulherPeso = {P1.getPeso(), P2.getPeso(),P3.getPeso()};
+        
+//qnt mulheres > 1.60 and < 1.70
+        
         int qtdALturaPeso = 0;
         int qtdMulheres = 0;
-        for(int i = 0; i < sexo.length; i++){
+        for(int i = 0; i < sexoPacientes.length; i++){
             if (sexo[i] == "F") {
-                if (qtdMulherAltura[i] > 1.60 && qtdMulherAltura[i] < 1.70 && qtdMulherPeso[i] > 70) {
+                if (alturaPacientes[i] > 1.60 && alturaPacientes[i] < 1.70 && pesoPacientes[i] > 70) {
                     qtdALturaPeso += 1;
                 }
                 qtdMulheres += 1;
@@ -50,51 +52,59 @@ public class Main {
         }else {
             System.out.println("NÃO EXISTEM MULHERES NA SALA");
         }
+        
+//FIM
 
-        int[] idades = {P1.getIdade(),P2.getIdade(),P3.getIdade()};
+        
+//PESSOAS COM IDADE >= 18 and <= 25
+        
+        
         int qtdIdade = 0;
-        for(int i = 0; i < idades.length;i++){
-            if(idades[i] >= 18 && idades[i] <= 25){
+        for(int i = 0; i < idadePacientes.length;i++){
+            if(idadePacientes[i] >= 18 && idadePacientes[i] <= 25){
                 qtdIdade += 1;
             }
 
         }
         System.out.println("A quantidade de pessoas com idade entre 18 e 25 anos é: " + qtdIdade);
-
-        int idadesEspecial[] = {P1.getIdade(),P2.getIdade(),P3.getIdade()};
-        String[] nomesEspecial = {P1.getNome(),P2.getNome(),P3.getNome()};
+        
+        
+//FIM
+        
+//PACIENTE COM IDADE MAIS AVANÇADA       
 
         int maiorIdade = 0;
         String nomeMaiorIdade = "";
 
-        for(int i = 0; i < idadesEspecial.length; i++) {
+        for(int i = 0; i < idadePacientes.length; i++) {
 
-            if (maiorIdade < idadesEspecial[i]) {
+            if (maiorIdade < idadePacientes[i]) {
 
-                maiorIdade = idadesEspecial[i];
-                nomeMaiorIdade = nomesEspecial[i];
+                maiorIdade = idadePacientes[i];
+                nomeMaiorIdade = nomePacientes[i];
 
             }
         }
 
         System.out.println("O paciente com a idade mais avançada é: " + nomeMaiorIdade);
+        
+        
+//FIM
+        
+//MULHER COM MENOR ALTURA        
 
         if (qtdMulheres > 0){
-            double[] qtdMulherAlturaSpecial = {P1.getAltura(),P2.getAltura(),P3.getAltura()};
-            String[] sexoPacientes = {P1.getSexo(), P2.getSexo(), P3.getSexo()};
-            String[] nomesPacientes = {P1.getNome(), P2.getNome(), P3.getNome()};
-
-
-            double menorAltura = P1.getAltura();
+           
+            double menorAltura = alturaPacientes[0];
             String nomeMenorAltura = "";
 
-            for(int i = 0; i< qtdMulherAlturaSpecial.length; i++){
+            for(int i = 0; i< alturaPacientes.length; i++){
 
                 if(sexoPacientes[i] == "F"){
 
-                    if(menorAltura > qtdMulherAlturaSpecial[i]){
-                        menorAltura = qtdMulherAlturaSpecial[i];
-                        nomeMenorAltura = nomesPacientes[i];
+                    if(menorAltura > alturaPacientes[i]){
+                        menorAltura = alturaPacientes[i];
+                        nomeMenorAltura = nomePacientes[i];
 
                     }
                 }
@@ -106,4 +116,6 @@ public class Main {
 
 
     }
+    
+//FIM    
 }
