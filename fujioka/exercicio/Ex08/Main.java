@@ -1,99 +1,155 @@
 package com.fujioka.exercicio.Ex08;
 
-import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        Ex08Class P1 = new Ex08Class("Lucas","M",18,80,1.66);
-        Ex08Class P2 = new Ex08Class("Maria","F",18,55.30,1.60);
-        Ex08Class P3 = new Ex08Class("Jose","M",50,94.96,1.65);
+        Scanner scan = new Scanner(System.in);
 
-        String[] nomePacientes = {P1.getNome(),P2.getNome(),P3.getNome()};
-        String[] sexoPacientes = {P1.getSexo(),P2.getSexo(),P3.getSexo()};
-        int[] idadePacientes = {P1.getIdade(), P2.getIdade(), P3.getIdade()};
-        double[] pesoPacientes = {P1.getPeso(), P2.getPeso(),P3.getPeso()};
-        double[] alturaPacientes = {P1.getAltura(), P2.getAltura(),P3.getAltura()};
+        String nome = "";
+        String sexo;
+        String nomeMenorMulher = "";
+        String nomePacienteMaisVelho = "";
 
-        int somaIdade = 0;
-        int qtdHomens= 0;
-        int qtdALturaPeso = 0;
+        double peso;
+        double altura;
+        double menorAlturaMulher = 0;
+
+        int idade;
+        int qtdPaciente = 0;
+        int mediaIdadeHomens = 0;
+        int qtdHomens = 0;
         int qtdMulheres = 0;
-        int qtdIdade = 0;
+        int qtdMulheresEspecial = 0;
+        int qtdPessoasEspecial = 0;
         int maiorIdade = 0;
-        String nomeMaiorIdade = "";
 
-        //M = MASCULINO
-        //F = FEMININO
+        ArrayList<Double> listaAlturaMulheres = new ArrayList<Double>();
+        ArrayList<String> listaNomeMulheres = new ArrayList<String>();
+        ArrayList<String> listaBaixinhasRepetidas = new ArrayList<String>();
+        ArrayList<String> listaVelhosRepetidos = new ArrayList<String>();
 
-        System.out.println("Existem "+ nomePacientes.length + " pacientes na clinica");
+         while (!nome.equalsIgnoreCase("fim")){
+             System.out.println("DIGITE O NOME DO "+(qtdPaciente + 1)+"º PACIENTE");
+             nome = scan.next();
+             nome = nome.toUpperCase();
 
-//MEDIA IDADE HOMENS NA SALA
+             if (nome.equalsIgnoreCase("fim")){
+                 break;
+             }
 
-        for(int i = 0; i < nomePacientes.length; i++){
-            if (sexoPacientes[i] == "M") {
-                somaIdade += idadePacientes[i];
-                qtdHomens +=1;
-            }
-        }if (qtdHomens > 0){
-            int meidaIdadeM = somaIdade / qtdHomens;
-            System.out.println("A média de idade dos homens é: "+ meidaIdadeM);
-        } else {
-            System.out.println("Não existem homens na sala");
-        }
-//FIM
+             System.out.println("DIGITE O SEXO (M ou F) DO "+(qtdPaciente + 1)+"º PACIENTE");
+             sexo = scan.next();
+             sexo = sexo.toUpperCase();
 
+             while (!sexo.equalsIgnoreCase("M") || !sexo.equalsIgnoreCase("F")){
+                 if (sexo.equalsIgnoreCase("M") || sexo.equalsIgnoreCase("F")){
+                     break;
+                 }else {
+                     System.out.println("SEXO INVÁLIDO, TENTE NOVAMENTE (M ou F):");
+                     sexo = scan.next();
+                     sexo = sexo.toUpperCase();
+                 }
+             }
 
-//qnt mulheres > 1.60 and < 1.70
-        for(int i = 0; i < sexoPacientes.length; i++){
-            if (sexoPacientes[i] == "F") {
-                if (alturaPacientes[i] > 1.60 && alturaPacientes[i] < 1.70 && pesoPacientes[i] > 70) {
-                    qtdALturaPeso += 1;
-                }
-                qtdMulheres += 1;
-            }
-        }if (qtdMulheres > 0){
-            System.out.println("A quantidade de mulheres com altura entre 1,60 e 1,70 e peso acima de 70Kg é: " + qtdALturaPeso);
-        }else {
-            System.out.println("NÃO EXISTEM MULHERES NA SALA");
-        }
-//FIM
+             System.out.println("DIGITE A IDADE DO "+(qtdPaciente + 1)+"º PACIENTE");
+             idade = scan.nextInt();
 
+             System.out.println("DIGITE O PESO DO "+(qtdPaciente + 1)+"º PACIENTE(KG)");
+             peso = scan.nextDouble();
 
-//PESSOAS COM IDADE >= 18 and <= 25
-        for(int i = 0; i < idadePacientes.length;i++){
-            if(idadePacientes[i] >= 18 && idadePacientes[i] <= 25){
-                qtdIdade += 1;
-            }
-        }
-        System.out.println("A quantidade de pessoas com idade entre 18 e 25 anos é: " + qtdIdade);
-//FIM
+             System.out.println("DIGITE A ALTURA DO "+(qtdPaciente + 1)+"º PACIENTE (METROS)");
+             altura = scan.nextDouble();
 
+             Ex08Class P = new Ex08Class(nome,sexo,idade,peso,altura);
 
-//PACIENTE COM IDADE MAIS AVANÇADA
-        for(int i = 0; i < idadePacientes.length; i++) {
-            if (maiorIdade < idadePacientes[i]) {
-                maiorIdade = idadePacientes[i];
-                nomeMaiorIdade = nomePacientes[i];
-            }
-        }
-        System.out.println("O paciente com a idade mais avançada é: " + nomeMaiorIdade);
-//FIM
+             //System.out.println("");
+             System.out.println("NOME DO "+ (qtdPaciente + 1) + "º PACIENTE: " + P.getNome());
+             System.out.println("SEXO DO "+ (qtdPaciente + 1) + "º PACIENTE: " + P.getSexo());
+             System.out.println("IDADE DO "+ (qtdPaciente + 1) + "º PACIENTE: " + P.getIdade() + " anos");
+             System.out.println("PESO DO "+ (qtdPaciente + 1) + "º PACIENTE: " + P.getPeso() + "kg");
+             System.out.println("ALTURA DO "+ (qtdPaciente + 1) + "º PACIENTE: " + P.getAltura() + "m");
+             //System.out.println("");
 
+             //COLETANDO QTD PACIENTES
+             qtdPaciente++;
 
-//MULHER COM MENOR ALTURA
-        if (qtdMulheres > 0){
-            double menorAltura = alturaPacientes[0];
-            String nomeMenorAltura = "";
-            for(int i = 0; i< alturaPacientes.length; i++){
-                if(sexoPacientes[i] == "F"){
-                    if(menorAltura > alturaPacientes[i]){
-                        menorAltura = alturaPacientes[i];
-                        nomeMenorAltura = nomePacientes[i];
-                    }
-                }
-            }
-            System.out.println("O nome da mulher com a menor altura é:" + nomeMenorAltura);
-        }
+             //COLETANDO MEDIA IDADE HOMENS
+             if(P.getSexo().equalsIgnoreCase("M")){
+                 mediaIdadeHomens += P.getIdade();
+                 qtdHomens++;
+             }
+             //OPERANDO COM MULHERES
+             else if (P.getSexo().equalsIgnoreCase("F")) {
+                 qtdMulheres++;
+                 //COLETANDO MULHER MAIS BAIXA
+                 listaAlturaMulheres.add(P.getAltura());
+                 listaNomeMulheres.add(P.getNome());
+                 menorAlturaMulher = Collections.min(listaAlturaMulheres);
+
+                 for (int i = 0; i < qtdMulheres; i++){
+                     if (menorAlturaMulher == listaAlturaMulheres.get(i)){
+                         nomeMenorMulher = listaNomeMulheres.get(i);
+                     }
+                 }
+
+                 //COLETANDO QTD MULHERES COM ALTURA ENTRE 1,60 E 1,70 E PESO ACIMA DE 70kg
+                 if (P.getAltura() >= 1.60 && P.getAltura() <= 1.70 && P.getPeso() > 70){
+                     qtdMulheresEspecial++;
+                 }
+             }
+
+             //COLETANDO QTD DE PESSOAS COM IDADE ENTRE 18 E 25 ANOS
+             if (P.getIdade() >= 18 && P.getIdade() <=25){
+                 qtdPessoasEspecial++;
+             }
+
+             //COLETANDO NOME PACIENTE MAIS VELHO
+             for(int i = 0; i < qtdPaciente; i++){
+                 if(maiorIdade <= P.getIdade()){
+                     if (P.getIdade() >= maiorIdade){
+                         maiorIdade = P.getIdade();
+                         nomePacienteMaisVelho = P.getNome();
+                     }
+                 }
+             }
+         }
+         if (qtdPaciente == 0){
+             System.out.println("NÃO EXISTEM PACIENTES NO CONSULTÓRIO");
+         }else {
+             //QTD PACIENTES//
+             System.out.println("QUANTIDADE DE PACIENTES = " + qtdPaciente);
+
+             //MEDIA IDADE HOMENS//
+             if (qtdHomens == 0){
+                 System.out.println("NÃO EXISTEM HOMENS NA SALA");
+             }else {
+                 mediaIdadeHomens = mediaIdadeHomens/qtdHomens;
+                 System.out.println("MEDIA IDADE DOS HOMENS = " + mediaIdadeHomens);
+             }
+
+             //QTD MULHERES COM ALTURA ENTRE 1,60 E 1,70 E PESO ACIMA DE 70kg//
+             if (qtdMulheres == 0){
+                 System.out.println("NÃO EXISTEM MULHERES NA SALA");
+             }else {
+                 System.out.println("QTD MULHERES COM ALTURA ENTRE 1,60 E 1,70 E PESO ACIMA DE 70kg = " + qtdMulheresEspecial);
+             }
+
+             //PESSOAS COM IDADE ENTRE 18 E 25 ANOS//
+             System.out.println("PESSOAS COM IDADE ENTRE 18 E 25 ANOS = " + qtdPessoasEspecial);
+
+             //PACIENTE MAIS VELHO//
+             System.out.println("NOME PACIENTE MAIS VELHO = " + nomePacienteMaisVelho);
+
+             //MULHER MAIS BAIXA//
+             if (qtdMulheres == 0){
+                 System.out.println("NÃO EXISTEM MULHERES NA SALA");
+             }else {
+                 System.out.println("MULHER MAIS BAIXA = " + nomeMenorMulher);
+             }
+         }
     }
-//FIM
 }
