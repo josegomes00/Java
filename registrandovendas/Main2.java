@@ -1,9 +1,10 @@
-package registrandovendas;
+package com.RegistrandoVendas;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main2 {
+
     public static void menu() {
         System.out.println("DIGITE [1] PARA CADASTRAR UM VENDEDOR");
         System.out.println("DIGITE [2] PARA REGISTRAR UMA VENDA");
@@ -95,7 +96,6 @@ public class Main2 {
                     ven.setVendedor(v);
                     ven.setProduto(p);
                     ven.setQtdItens(qtdItens);
-                    ven.setValor(valorVenda);
                     ven.setDesconto(desconto);
 
                 } else if (option == 3) {
@@ -104,7 +104,7 @@ public class Main2 {
                     System.out.println();
 
                 } else if (option == 100) {
-                    System.out.println("Finalizando...");
+                    System.out.println("Finaliz1ando...");
 
                 } else {
                     System.out.println("Opção Inválida!!");
