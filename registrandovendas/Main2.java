@@ -104,7 +104,7 @@ public class Main2 {
                     System.out.println();
 
                 } else if (option == 100) {
-                    System.out.println("Finaliz1ando...");
+                    System.out.println("Finalizando...");
 
                 } else {
                     System.out.println("Opção Inválida!!");
