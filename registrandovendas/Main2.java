@@ -1,4 +1,4 @@
-package com.RegistrandoVendas;
+package registrandovendas;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
